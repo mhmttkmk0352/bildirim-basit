@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/socket.io.js"></script>
+    <script>
+        var s = io.connect("http://185.122.200.117:7102");
+        var sid = "";
+        var id = "merve";
+        s.on("connect", function(){
+            sid = s.id;
+            console.log( {sid:sid } );
+            s.emit("adduser", {id:id});
+        });
+
+        s.on("bildirim", function(data){
+            if (data && data.mesaj){
+                swal({
+                    title: "1 adet mesajınız var",
+                    text: data.mesaj,
+                    icon: "success"
+                });
+            }
+        });
+    </script>
+    
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+
+</html>
